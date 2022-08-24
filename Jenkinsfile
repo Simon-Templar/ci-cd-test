@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment{
         ARTIFACTORY_LOGIN=credentials('artifactory-login')
-        SERVER_LOGIN=credentials('Linux-Manu')
+        SERVER_LOGIN=credentials('Linux_Manu')
     }
     parameters {
         choice(name: 'BASE_INSTALLATION',
