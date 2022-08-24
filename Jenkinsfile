@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo "Git checkout"
                 sh 'git --version'
-                git branch: 'main', url: 'https://github.com/5IGE/ci-cd-test.git'
+                git branch: 'main', url: 'https://github.com/Simon-Templar/ci-cd-test.git'
             }
         }
         stage('Base installation') {
