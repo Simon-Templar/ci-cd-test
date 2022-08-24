@@ -22,7 +22,7 @@ pipeline {
                description: 'user for ssh connection')
 
         string(name: 'SERVER_FQDN',
-               defaultValue: 'ec2-18-193-120-77.eu-central-1.compute.amazonaws.com',
+               defaultValue: 'ec2-3-73-0-144.eu-central-1.compute.amazonaws.com',
                description: 'Server address for ssh connection')
     }
     
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo "Git checkout (for demonstration only)"
                 sh 'git --version'
-                git branch: 'main', url: 'https://github.com/helijunky/ci-cd-test.git'
+                git branch: 'k8s', url: 'https://github.com/Simon-Templar/ci-cd-test.git'
             }
         }
         stage('Pull Docker images') {
@@ -39,8 +39,8 @@ pipeline {
                 echo "Build Docker image ${params.IMAGE}"
                 sh "docker pull mongo:5.0"
                 sh "docker tag mongo:5.0 ${params.ARTIFACTORY_URL}/mongo:5.0"
-                sh "docker pull rocket.chat:4.8.1"
-                sh "docker tag rocket.chat ${params.ARTIFACTORY_URL}/rocket.chat:4.8.1"
+                sh "docker pull rocket.chat:5.0.3"
+                sh "docker tag rocket.chat ${params.ARTIFACTORY_URL}/rocket.chat:5.0.3"
             }
         }
         stage('Push Docker images to jFrog') {
@@ -48,7 +48,7 @@ pipeline {
                 echo "Push Docker image to jFrog"
                 sh "docker login ${params.ARTIFACTORY_URL} --username ${env.ARTIFACTORY_LOGIN_USR} --password ${env.ARTIFACTORY_LOGIN_PSW}"
                 sh "docker push ${params.ARTIFACTORY_URL}/mongo:5.0"
-                sh "docker push ${params.ARTIFACTORY_URL}/rocket.chat:4.8.1"
+                sh "docker push ${params.ARTIFACTORY_URL}/rocket.chat:5.0.3"
                 sh "docker logout ${params.ARTIFACTORY_URL}"
             }
         }
