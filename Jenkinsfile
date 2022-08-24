@@ -22,7 +22,7 @@ pipeline {
                description: 'user for ssh connection')
 
         string(name: 'SERVER_FQDN',
-               defaultValue: 'ec2-18-193-120-77.eu-central-1.compute.amazonaws.com',
+               defaultValue: 'ec2-3-73-0-144.eu-central-1.compute.amazonaws.com',
                description: 'Server address for ssh connection')
     }
     
@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo "Git checkout (for demonstration only)"
                 sh 'git --version'
-                git branch: 'main', url: 'https://github.com/helijunky/ci-cd-test.git'
+                git branch: 'aws', url: ''https://github.com/Simon-Templar/ci-cd-test.git
             }
         }
         stage('Pull Docker images') {
